@@ -6,6 +6,7 @@ export default class App extends Component {
                     'dumb test'
                 )
                 
+                
             }
     render () {
         return <p>Thiasdds is my new reacts app</p>
