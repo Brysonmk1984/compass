@@ -6,6 +6,7 @@
   "scripts": {
     "test": "mocha",
     "prettier": "prettier 'src/**/*.js'",
+    "precommit": "lint-staged",
     "dev": "webpack-dev-server",
     "build": "webpack"
   },
