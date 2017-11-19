@@ -1,11 +1,14 @@
 import React from 'react';
+import './assets/sass/styles.scss';
 
-export default class App extends Component {
+export default class App extends React.Component {
   testMethod() {
-    console.log('dumb test2');
+    console.log('dumb test2ss');
+    console.log(eval('1+2'));
   }
 
   render() {
-    return <p>Thiasdds is my new reacts app</p>;
+    this.testMethod();
+    return <div>Thisss dsadsas</div>;
   }
 }

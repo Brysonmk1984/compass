@@ -30,7 +30,7 @@
       "no-else-return": "warn",
       "no-empty": ["error", { "allowEmptyCatch": true }],
       "no-empty-function": ["error", { "allow": ["constructors", "arrowFunctions"] }],
-      "no-eval": "warn",
+      "no-eval": "error",
       "no-extra-label": "error",
       "no-floating-decimal": "error",
       "no-implied-eval": "warn",
@@ -136,6 +136,7 @@
     },
     "extends": [
       "eslint:recommended",
+      "react-app",
       "prettier",
       "prettier/flowtype",
       "prettier/react",
@@ -143,7 +144,6 @@
     ],
     "plugins":[
       "react",
-      "react-native",
       "flowtype",
       "prettier"
     ]
