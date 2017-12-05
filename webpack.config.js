@@ -4,7 +4,7 @@ var path = require('path');
 var parentDir = path.join(__dirname, './');
 
 module.exports = {
-  entry: [path.join(parentDir, 'index.js')],
+  entry: ['babel-polyfill', path.join(parentDir, 'index.js')],
   module: {
     loaders: [
       {
@@ -12,7 +12,7 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2015', 'react'],
+          presets: ['env', 'stage-0', 'react'],
         },
       },
       {
