@@ -1,7 +1,11 @@
 import React from 'react';
 
-export default class Nav extends React.Component {
+export default class Header extends React.Component {
   render() {
-    return <nav>The nav</nav>;
+    return (
+      <header>
+        <h1>Socioeconomic Compass</h1>
+      </header>
+    );
   }
 }

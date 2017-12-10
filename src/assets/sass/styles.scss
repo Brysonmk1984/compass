@@ -1,24 +1,63 @@
-body{
-    nav{
-        background-color:gray;
-    }
-    section.grid_wrapper{
-        background-color: #f3f3f3;
-        display:grid;
-        grid-template-columns: repeat(50, 1fr);
+@import url('https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed|Open+Sans+Condensed:300|Spectral+SC:700');
 
-        grid-auto-rows: 1fr;
-        /*grid-auto-rows: minmax(1fr, 1fr);
-        grid-auto-columns: minmax(1fr, 1fr);*/
-        grid-column-gap: 1px;
-        grid-row-gap: 1px;
+body{
+    header{
+        background-color:#E0162B;
+        h1{
+            font-family: 'Spectral SC', serif;
+            text-transform:capitalize;
+            font-size:40px;
+            color:white;
+            margin:0px;
+            padding:5px 20px;
+        }
+    }
+    section{
+       display:flex;
+       flex:1;
+       justify-content: center;
+       background-color:#191919;
+       padding-top:20px;
+       padding-bottom:20px;
+    }
+    .grid_wrapper{
+        display:grid;
+        grid-template-columns: repeat(50, 1.92vw);
+        grid-auto-rows: 1.92vw;
+
         .grid_square{
-            border:solid 1px black;
-            height:15px;
-            width:15px;
+            border-right:solid 1px black;
+            border-bottom:solid 1px black;
+        }
+        div{
+            // First 50
+            &:nth-child(-n+50){
+                border-top:solid 3px black;
+            }
+            //Every 50, starting at 1
+            &:nth-child(50n+1){
+                border-left:solid 3px black;
+            }
+            // Every 50, starting at 50
+            &:nth-child(50n){
+                border-right:none;
+            }
+            // Last 50
+            &:nth-child(n+2451){
+                border-bottom:solid 3px black;
+            }
+            // Every 25
+            &:nth-child(25n){
+                border-right:solid 3px black;
+            }
+            //1250 - 1300
+            &:nth-child(n+1251):nth-child(-n+1300){
+                border-top:solid 3px black;
+            }
+            
         }
     }
     footer{
-        background:#333;
+        background:#0052A5;
     }
 }
