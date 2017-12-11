@@ -1,9 +1,11 @@
 import React from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './assets/sass/styles.scss';
 import Nav from './components/Nav';
 import Compass from './components/Compass';
+import Dialog from './components/Dialog';
 import Footer from './components/Footer';
-import twitterUsers from './assets/js/twitterUsers';
+import { twitterUsers, historicalPeople } from './assets/js/users';
 import { getUserTweets } from './services/getTweets';
 
 export default class App extends React.Component {
@@ -11,35 +13,79 @@ export default class App extends React.Component {
     super();
     this.state = {
       twitterUsers,
-      selectedUserTweets: [],
+      selectedPerson: {
+        firstName: '',
+        lastName: '',
+        handle: '',
+        profileUrl: '',
+        tweets: [],
+      },
+      modalOpen: false,
     };
   }
 
-  _getUserTweets(user) {
-    getUserTweets(user).then(({ data }) => {
-      this.setState(
-        () => ({
-          selectedUserTweets: data,
-        }),
-        () => {
-          console.log('S', this.state.selectedUserTweets);
-        },
-      );
+  _getUserData(handle) {
+    if (!handle) {
+      return;
+    }
+    const matchingUser = this.state.twitterUsers.find(user => {
+      return user.handle === handle;
     });
+    this.setState(() => ({
+      selectedPerson: Object.assign(this.state.selectedPerson, {
+        firstName: matchingUser.firstName,
+        lastName: matchingUser.lastName,
+        profileUrl: matchingUser.profileUrl,
+      }),
+    }));
+
+    this._getUserTweets(matchingUser);
+    this._toggleModal();
+  }
+
+  _getUserTweets(user) {
+    getUserTweets(user.handle).then(({ data }) => {
+      if (data) {
+        this.setState(() => ({
+          selectedPerson: Object.assign(this.state.selectedPerson, { tweets: data }),
+        }));
+      }
+    });
+  }
+
+  _toggleModal() {
+    const modalOpen = this.state.modalOpen;
+
+    const newState = modalOpen
+      ? {
+          modalOpen: false,
+          selectedPerson: {
+            firstName: '',
+            lastName: '',
+            handle: '',
+            tweets: [],
+          },
+        }
+      : { modalOpen: true };
+
+    this.setState(() => newState);
   }
 
   render() {
     return (
-      <div>
-        <Nav />
-        <Compass />
-        <Footer getUserTweets={this._getUserTweets.bind(this)} twitterUsers={this.state.twitterUsers} />
+      <MuiThemeProvider>
         <div>
-          {this.state.selectedUserTweets.map((item, i) => {
-            return <p key={i}>{item.text}</p>;
-          })}
+          <Nav />
+          <Compass getUserData={this._getUserData.bind(this)} historicalPeople={historicalPeople} twitterUsers={this.state.twitterUsers} historical={historicalPeople} />
+          <Dialog
+            showSpinner={this.state.selectedPerson.tweets.length ? false : true}
+            selectedPerson={this.state.selectedPerson}
+            toggleModal={this._toggleModal.bind(this)}
+            modalOpen={this.state.modalOpen}
+          />
+          <Footer />
         </div>
-      </div>
+      </MuiThemeProvider>
     );
   }
 }
