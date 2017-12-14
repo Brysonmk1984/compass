@@ -1,7 +1,7 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './assets/sass/styles.scss';
-import Nav from './components/Nav';
+import Header from './components/Header';
 import Compass from './components/Compass';
 import Dialog from './components/Dialog';
 import Footer from './components/Footer';
@@ -75,7 +75,7 @@ export default class App extends React.Component {
     return (
       <MuiThemeProvider>
         <div>
-          <Nav />
+          <Header />
           <Compass getUserData={this._getUserData.bind(this)} historicalPeople={historicalPeople} twitterUsers={this.state.twitterUsers} historical={historicalPeople} />
           <Dialog
             showSpinner={this.state.selectedPerson.tweets.length ? false : true}
