@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300');
 @import '../../../node_modules/balloon-css/balloon.min.css';
 body{
+    font-family: 'Open Sans';
     header{
         background-color:#E0162B;
         h1{
-            font-family: 'Open Sans';
             text-transform:capitalize;
             font-size:40px;
             color:white;
@@ -75,8 +75,27 @@ body{
             z-index:10;
         }
     }
+    
+    ul#tweetList{
+        li{
+            margin-bottom:10px;
+            a{
+                color:#0EBFE9;
+            }
+        }
+    }
 
     footer{
         background:#0052A5;
+        text-align:center;
+        color:white;
+        padding:20px;
+        display:flex;
+        flex:1;
+        flex-direction:column;
+        align-items:center;
+        div{
+            padding:10px;
+        }
     }
 }
