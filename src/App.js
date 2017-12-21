@@ -7,6 +7,7 @@ import Dialog from './components/Dialog';
 import Footer from './components/Footer';
 import { twitterUsers, historicalPeople } from './assets/js/users';
 import { getUserTweets } from './services/getTweets';
+import { getWiki } from './services/getWiki';
 
 export default class App extends React.Component {
   constructor() {
@@ -19,6 +20,7 @@ export default class App extends React.Component {
         handle: '',
         profileUrl: '',
         tweets: [],
+        wiki: '',
       },
       modalOpen: false,
     };
@@ -40,6 +42,7 @@ export default class App extends React.Component {
     }));
 
     this._getUserTweets(matchingUser);
+    this._getWiki(matchingUser.firstName, matchingUser.lastName);
     this._toggleModal();
   }
 
@@ -50,6 +53,20 @@ export default class App extends React.Component {
           selectedPerson: Object.assign(this.state.selectedPerson, { tweets: data }),
         }));
       }
+    });
+  }
+
+  _getWiki(firstName, lastName) {
+    function strip(html) {
+      const tmp = document.createElement('DIV');
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || '';
+    }
+
+    getWiki(firstName, lastName).then(({ data }) => {
+      this.setState(() => ({
+        selectedPerson: Object.assign(this.state.selectedPerson, { wiki: strip(data) }),
+      }));
     });
   }
 

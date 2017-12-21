@@ -31,6 +31,17 @@ export default class TabWrapper extends React.Component {
       return <li key={i}>{t}</li>;
     });
   }
+
+  _renderWiki(wiki) {
+    if (wiki) {
+      return (
+        <div>
+          <p>{wiki}</p>
+        </div>
+      );
+    }
+    return <div>Description unavailable</div>;
+  }
   render() {
     return (
       <Tabs>
@@ -46,12 +57,8 @@ export default class TabWrapper extends React.Component {
             </div>
           </div>
         </Tab>
-        <Tab label="Wiki">
-          <div>
-            <p>This is another example tab.</p>
-          </div>
-        </Tab>
-        <Tab label="Website">
+        <Tab label="Wiki">{this._renderWiki(this.props.selectedPerson.wiki)}</Tab>
+        <Tab label="Resources">
           <div>
             <p>This is a third example tab.</p>
           </div>
