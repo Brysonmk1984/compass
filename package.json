@@ -9,7 +9,7 @@
     "precommit": "lint-staged",
     "dev": "webpack-dev-server",
     "build": "webpack",
-    "start": "node compassBackend/server.js"
+    "start": { "postinstall": "cd commpassBackend && npm install" }
   },
   "author": "",
   "license": "ISC",
