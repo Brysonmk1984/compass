@@ -26,9 +26,11 @@ module.exports = function(app, db) {
       });
   });
 
-  app.get('*',function (req, res) {
+  app.get('*', function(req, res) {
     res.redirect('../');
   });
 
-
+  app.listen(process.env.PORT || 3000, function() {
+    console.log('Express server listening on port %d in %s mode', process.env.PORT);
+  });
 };
