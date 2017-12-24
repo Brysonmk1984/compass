@@ -9,7 +9,7 @@
     "precommit": "lint-staged",
     "dev": "webpack-dev-server",
     "build": "webpack",
-    "start": "node ./compassBackend/server.js"
+    "start": "poop"
   },
   "author": "",
   "license": "ISC",
