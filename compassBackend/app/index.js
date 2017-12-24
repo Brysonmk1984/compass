@@ -3,7 +3,7 @@ const https = require('https');
 const { getWiki } = require('./getWiki');
 const getTweets = require('./getTweets').promiseVersion;
 const { promiseVersion, callbackVersion } = require('./getWiki');
-
+console.log('TEST');
 module.exports = function(app, db) {
   app.get('/:user', (request, response) => {
     const user = request.params.user;
@@ -25,4 +25,10 @@ module.exports = function(app, db) {
         console.log('e', e);
       });
   });
+
+  app.get('*',function (req, res) {
+    res.redirect('../');
+  });
+
+
 };
