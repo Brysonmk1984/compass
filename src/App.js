@@ -88,6 +88,10 @@ export default class App extends React.Component {
     this.setState(() => newState);
   }
 
+  componentDidMount() {
+    this._getWiki('Abby', 'Martin');
+  }
+
   render() {
     return (
       <MuiThemeProvider>

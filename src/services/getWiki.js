@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export function getWiki(firstName, lastName) {
-  const url = `http://localhost:8000/wiki`;
-
+  //const url = `http://localhost:8000/wiki`;
+  const url = 'https://political-compass.herokuapp.com/wiki';
   return new Promise((resolve, reject) => {
     const options = {
       firstName,
