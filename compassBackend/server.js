@@ -13,6 +13,7 @@ app.use(cors());
 require('./app/index')(app, {});
 
 const port = 8000;
-app.listen(port, () => {
-  console.log('We are live on ' + port);
+
+app.listen(process.env.PORT || port, function() {
+  console.log('Express server listening on port %d in %s mode', process.env.PORT || port);
 });
