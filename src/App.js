@@ -40,7 +40,6 @@ export default class App extends React.Component {
         profileUrl: matchingUser.profileUrl,
       }),
     }));
-
     this._getUserTweets(matchingUser);
     this._getWiki(matchingUser.firstName, matchingUser.lastName);
     this._toggleModal();
@@ -64,9 +63,13 @@ export default class App extends React.Component {
     }
 
     getWiki(firstName, lastName).then(({ data }) => {
-      this.setState(() => ({
-        selectedPerson: Object.assign(this.state.selectedPerson, { wiki: strip(data) }),
-      }));
+      console.log('stripped wiki', data);
+      this.setState(
+        () => ({
+          selectedPerson: Object.assign(this.state.selectedPerson, { wiki: strip(data) }),
+        }),
+        () => console.log('STATE', this.state),
+      );
     });
   }
 
@@ -87,11 +90,6 @@ export default class App extends React.Component {
 
     this.setState(() => newState);
   }
-
-  componentDidMount() {
-    this._getWiki('Abby', 'Martin');
-  }
-
   render() {
     return (
       <MuiThemeProvider>

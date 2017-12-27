@@ -10,7 +10,7 @@ export default class TabWrapper extends React.Component {
       let url;
 
       if (t.includes('http')) {
-        console.log('TWEE', tweet);
+        //console.log('TWEE', tweet);
         t = t.split('http')[0];
 
         if (tweet.entities.urls.length) {

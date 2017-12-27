@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
-
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var parentDir = path.join(__dirname, './');
 
 module.exports = {
@@ -25,6 +25,7 @@ module.exports = {
     path: parentDir + '/dist',
     filename: 'bundle.js',
   },
+  plugins: [new HtmlWebpackPlugin({ filename: './index.html' })],
   resolve: {
     alias: {
       '~': path.resolve(__dirname, 'src'),
