@@ -25,7 +25,7 @@ module.exports = {
     path: parentDir + '/dist',
     filename: 'bundle.js',
   },
-  plugins: [new HtmlWebpackPlugin({ filename: './index.html' })],
+  plugins: [new HtmlWebpackPlugin({ template: './index.html' })],
   resolve: {
     alias: {
       '~': path.resolve(__dirname, 'src'),

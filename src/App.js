@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import { twitterUsers, historicalPeople } from './assets/js/users';
 import { getUserTweets } from './services/getTweets';
 import { getWiki } from './services/getWiki';
+import initiateHeroku from './services/initiateHeroku';
 
 export default class App extends React.Component {
   constructor() {
@@ -23,25 +24,40 @@ export default class App extends React.Component {
         wiki: '',
       },
       modalOpen: false,
+      classificationFilter: 'all',
     };
   }
 
-  _getUserData(handle) {
-    if (!handle) {
-      return;
+  _getUserData(person) {
+    let firstName = '';
+    let lastName = '';
+    let profileUrl = '';
+
+    // Non twitter users
+    if (!person.handle) {
+      firstName = person.firstName;
+      lastName = person.lastName;
+      profileUrl = '';
+      // twitter user
+    } else {
+      const matchingUser = this.state.twitterUsers.find(user => {
+        return user.handle === person.handle;
+      });
+      this._getUserTweets(matchingUser);
+      firstName = matchingUser.firstName;
+      lastName = matchingUser.lastName;
+      profileUrl = matchingUser.profileUrl;
     }
-    const matchingUser = this.state.twitterUsers.find(user => {
-      return user.handle === handle;
-    });
+
     this.setState(() => ({
       selectedPerson: Object.assign(this.state.selectedPerson, {
-        firstName: matchingUser.firstName,
-        lastName: matchingUser.lastName,
-        profileUrl: matchingUser.profileUrl,
+        firstName: firstName,
+        lastName: lastName,
+        profileUrl: profileUrl,
       }),
     }));
-    this._getUserTweets(matchingUser);
-    this._getWiki(matchingUser.firstName, matchingUser.lastName);
+
+    this._getWiki(firstName, lastName);
     this._toggleModal();
   }
 
@@ -63,13 +79,9 @@ export default class App extends React.Component {
     }
 
     getWiki(firstName, lastName).then(({ data }) => {
-      console.log('stripped wiki', data);
-      this.setState(
-        () => ({
-          selectedPerson: Object.assign(this.state.selectedPerson, { wiki: strip(data) }),
-        }),
-        () => console.log('STATE', this.state),
-      );
+      this.setState(() => ({
+        selectedPerson: Object.assign(this.state.selectedPerson, { wiki: strip(data) }),
+      }));
     });
   }
 
@@ -90,14 +102,41 @@ export default class App extends React.Component {
 
     this.setState(() => newState);
   }
+
+  _updateFilter(val) {
+    this.setState(() => ({
+      classificationFilter: val,
+    }));
+  }
+
+  _determineSpinnerStatus() {
+    if (this.state.selectedPerson.profileUrl) {
+      return this.state.selectedPerson.tweets.length ? false : true;
+    } else {
+      return this.state.selectedPerson.wiki ? false : true;
+    }
+  }
+
+  componentDidMount() {
+    // Hit Heroku Server to spin up dyno immediately
+    initiateHeroku();
+  }
+
   render() {
     return (
       <MuiThemeProvider>
         <div>
-          <Header />
-          <Compass getUserData={this._getUserData.bind(this)} historicalPeople={historicalPeople} twitterUsers={this.state.twitterUsers} historical={historicalPeople} />
+          <Header classificationFilter={this.state.classificationFilter} updateFilter={this._updateFilter.bind(this)} />
+          <Compass
+            classificationFilter={this.state.classificationFilter}
+            getUserData={this._getUserData.bind(this)}
+            historicalPeople={historicalPeople}
+            twitterUsers={this.state.twitterUsers}
+            historical={historicalPeople}
+          />
           <Dialog
-            showSpinner={this.state.selectedPerson.tweets.length ? false : true}
+            disableTweets={this.state.selectedPerson.profileUrl === '' ? true : false}
+            showSpinner={this._determineSpinnerStatus()}
             selectedPerson={this.state.selectedPerson}
             toggleModal={this._toggleModal.bind(this)}
             modalOpen={this.state.modalOpen}

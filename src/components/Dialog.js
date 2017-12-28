@@ -16,7 +16,7 @@ export default class DialogWrapper extends React.Component {
         open={this.props.modalOpen}
         onRequestClose={() => this.props.toggleModal()}
       >
-        <TabWrapper showSpinner={this.props.showSpinner} selectedPerson={this.props.selectedPerson} />
+        <TabWrapper disableTweets={this.props.disableTweets} showSpinner={this.props.showSpinner} selectedPerson={this.props.selectedPerson} />
       </Dialog>
     );
   }
@@ -25,11 +25,12 @@ export default class DialogWrapper extends React.Component {
 DialogWrapper.propTypes = {
   modalOpen: PropTypes.bool.isRequired,
   toggleModal: PropTypes.func.isRequired,
-  showSpinner: PropTypes.bool.isRequired,
+  showSpinner: PropTypes.func.isRequired,
   selectedPerson: PropTypes.shape({
     handle: PropTypes.string,
     firstName: PropTypes.string,
     lastName: PropTypes.string,
     tweets: PropTypes.array,
   }).isRequired,
+  disableTweets: PropTypes.bool.isRequired,
 };

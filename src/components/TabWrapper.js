@@ -44,26 +44,28 @@ export default class TabWrapper extends React.Component {
   }
   render() {
     return (
-      <Tabs>
-        <Tab label="Tweets">
-          <div>
-            <div id="twitterFeedContainer">
-              <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <Spinner size={120} spinnerColor={'#333'} spinnerWidth={2} visible={this.props.showSpinner} />
+      <div>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Spinner size={120} spinnerColor={'#333'} spinnerWidth={2} visible={this.props.showSpinner} />
+        </div>
+        <div style={{ display: this.props.showSpinner ? 'none' : 'block' }}>
+          <Tabs>
+            <Tab label="Wiki">{this._renderWiki(this.props.selectedPerson.wiki)}</Tab>
+            <Tab style={{ display: this.props.disableTweets ? 'none' : 'block' }} label="Tweets">
+              <div>
+                <div id="twitterFeedContainer">
+                  <ul id="tweetList">{this._createTweetList(this.props.selectedPerson.tweets)}</ul>
+                </div>
               </div>
-              <div style={{ display: this.props.showSpinner ? 'none' : 'block' }}>
-                <ul id="tweetList">{this._createTweetList(this.props.selectedPerson.tweets)}</ul>
+            </Tab>
+            <Tab label="Resources">
+              <div>
+                <p>This is a third example tab.</p>
               </div>
-            </div>
-          </div>
-        </Tab>
-        <Tab label="Wiki">{this._renderWiki(this.props.selectedPerson.wiki)}</Tab>
-        <Tab label="Resources">
-          <div>
-            <p>This is a third example tab.</p>
-          </div>
-        </Tab>
-      </Tabs>
+            </Tab>
+          </Tabs>
+        </div>
+      </div>
     );
   }
 }

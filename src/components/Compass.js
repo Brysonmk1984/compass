@@ -21,13 +21,23 @@ export default class Compass extends React.Component {
   }
 
   _createPeople() {
-    console.log(this.props.twitterUsers);
     const allPeople = [...this.props.twitterUsers, ...this.props.historical];
+
     const people = allPeople.map((person, i) => {
       const { posX, posY } = this._determinePosition(person);
 
-      return <Person key={i} posX={posX} posY={posY} person={person} getUserData={this.props.getUserData.bind(this)} />;
+      return (
+        <Person
+          show={this.props.classificationFilter === person.classification || this.props.classificationFilter === 'all'}
+          key={i}
+          posX={posX}
+          posY={posY}
+          person={person}
+          getUserData={this.props.getUserData.bind(this)}
+        />
+      );
     });
+
     return people;
   }
 
