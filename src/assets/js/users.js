@@ -331,7 +331,7 @@ export const twitterUsers = [
     firstName: 'Donald',
     lastName: 'Trump',
     profileUrl: 'http://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_normal.jpg',
-    resources: { 'White House Profile': 'https://www.whitehouse.gov/people/donald-j-trump/', website: 'https://www.donaldjtrump.com/' },
+    resources: { 'On The Issues': 'http://www.ontheissues.org/Donald_Trump.htm', 'White House Profile': 'https://www.whitehouse.gov/people/donald-j-trump/', website: 'https://www.donaldjtrump.com/' },
   },
   {
     handle: 'GovGaryJohnson',
@@ -470,7 +470,6 @@ export const twitterUsers = [
     profileUrl: 'http://pbs.twimg.com/profile_images/451207149478096896/HoMUOmyu_normal.jpeg',
     resources: {
       'White House Profile': 'https://www.whitehouse.gov/about-the-white-house/presidents/william-j-clinton/',
-      website: 'https',
       'On The Issues': 'http://www.ontheissues.org/Bill_Clinton.htm',
     },
   },
@@ -577,7 +576,7 @@ export const historicalPeople = [
     lastName: 'Carter',
     profileUrl: 'https://winshipcancer.emory.edu/about-us/winship-80/images/jimmy-carter-thumbnail.jpg',
     resources: {
-      'biography.com Bio': 'https://www.biography.com/people/ronald-reagan-9453198',
+      'On The Issues': 'http://www.ontheissues.org/Jimmy_Carter.htm',
       website: 'https://www.cartercenter.org/',
       'White House Profile': 'https://www.whitehouse.gov/about-the-white-house/presidents/james-carter/',
     },
@@ -590,6 +589,10 @@ export const historicalPeople = [
     firstName: 'Ronald',
     lastName: 'Reagan',
     profileUrl: 'http://www.slate.com/content/dam/slate/archive/2004/06/24_040608_ronaldreagan.jpg.CROP.thumbnail-small.jpg',
-    resources: { 'biography.com Bio': 'https://www.biography.com/people/ronald-reagan-9453198', 'White House Profile': 'https://www.whitehouse.gov/about-the-white-house/presidents/ronald-reagan/' },
+    resources: {
+      'On The Issues': 'http://www.ontheissues.org/Ronald_Reagan.htm',
+      'biography.com Bio': 'https://www.biography.com/people/ronald-reagan-9453198',
+      'White House Profile': 'https://www.whitehouse.gov/about-the-white-house/presidents/ronald-reagan/',
+    },
   },
 ];
