@@ -11,6 +11,7 @@ export default class Controls extends React.Component {
         <option value="moneySpender">Money Spender</option>
         <option value="politician">Politician</option>
         <option value="pundit">Pundit</option>
+        <option value="other">Other</option>
       </select>
     );
   }

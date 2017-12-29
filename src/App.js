@@ -64,6 +64,7 @@ export default class App extends React.Component {
   _getUserTweets(user) {
     getUserTweets(user.handle).then(({ data }) => {
       if (data) {
+        console.log('!', data);
         this.setState(() => ({
           selectedPerson: Object.assign(this.state.selectedPerson, { tweets: data }),
         }));
