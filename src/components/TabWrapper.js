@@ -42,6 +42,21 @@ export default class TabWrapper extends React.Component {
     }
     return <div>Description unavailable</div>;
   }
+
+  _displayResources() {
+    const entries = Object.entries(this.props.selectedPerson.resources);
+    console.log('E', entries);
+    return entries.map((item, i) => {
+      return (
+        <li key={i}>
+          <a href={item[1]} target="_blank">
+            {item[0]}
+          </a>
+        </li>
+      );
+    });
+  }
+
   render() {
     return (
       <div>
@@ -50,7 +65,6 @@ export default class TabWrapper extends React.Component {
         </div>
         <div style={{ display: this.props.showSpinner ? 'none' : 'block' }}>
           <Tabs>
-            <Tab label="Wiki">{this._renderWiki(this.props.selectedPerson.wiki)}</Tab>
             <Tab style={{ display: this.props.disableTweets ? 'none' : 'block' }} label="Tweets">
               <div>
                 <div id="twitterFeedContainer">
@@ -58,9 +72,10 @@ export default class TabWrapper extends React.Component {
                 </div>
               </div>
             </Tab>
+            <Tab label="Wiki">{this._renderWiki(this.props.selectedPerson.wiki)}</Tab>
             <Tab label="Resources">
               <div>
-                <p>This is a third example tab.</p>
+                <ul>{this._displayResources()}</ul>
               </div>
             </Tab>
           </Tabs>

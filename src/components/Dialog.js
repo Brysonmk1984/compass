@@ -25,12 +25,13 @@ export default class DialogWrapper extends React.Component {
 DialogWrapper.propTypes = {
   modalOpen: PropTypes.bool.isRequired,
   toggleModal: PropTypes.func.isRequired,
-  showSpinner: PropTypes.func.isRequired,
+  showSpinner: PropTypes.bool.isRequired,
   selectedPerson: PropTypes.shape({
     handle: PropTypes.string,
     firstName: PropTypes.string,
     lastName: PropTypes.string,
     tweets: PropTypes.array,
+    resources: PropTypes.object.isRequired,
   }).isRequired,
   disableTweets: PropTypes.bool.isRequired,
 };

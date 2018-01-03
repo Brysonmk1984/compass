@@ -22,6 +22,7 @@ export default class App extends React.Component {
         profileUrl: '',
         tweets: [],
         wiki: '',
+        resources: {},
       },
       modalOpen: false,
       classificationFilter: 'all',
@@ -32,12 +33,14 @@ export default class App extends React.Component {
     let firstName = '';
     let lastName = '';
     let profileUrl = '';
+    let resources = {};
 
     // Non twitter users
     if (!person.handle) {
       firstName = person.firstName;
       lastName = person.lastName;
       profileUrl = '';
+      resources = person.resources;
       // twitter user
     } else {
       const matchingUser = this.state.twitterUsers.find(user => {
@@ -47,13 +50,15 @@ export default class App extends React.Component {
       firstName = matchingUser.firstName;
       lastName = matchingUser.lastName;
       profileUrl = matchingUser.profileUrl;
+      resources = matchingUser.resources;
     }
 
     this.setState(() => ({
       selectedPerson: Object.assign(this.state.selectedPerson, {
-        firstName: firstName,
-        lastName: lastName,
-        profileUrl: profileUrl,
+        firstName,
+        lastName,
+        profileUrl,
+        resources,
       }),
     }));
 
@@ -64,7 +69,6 @@ export default class App extends React.Component {
   _getUserTweets(user) {
     getUserTweets(user.handle).then(({ data }) => {
       if (data) {
-        console.log('!', data);
         this.setState(() => ({
           selectedPerson: Object.assign(this.state.selectedPerson, { tweets: data }),
         }));
