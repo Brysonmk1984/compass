@@ -8,7 +8,7 @@ export default class Header extends React.Component {
     return (
       <Headroom>
         <header>
-          <h1>Socioeconomic Compass</h1>
+          <h1>Media Map of America</h1>
           <Controls filter={this.props.classificationFilter} updateFilter={this.props.updateFilter} />
         </header>
       </Headroom>

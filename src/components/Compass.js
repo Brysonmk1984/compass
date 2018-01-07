@@ -59,6 +59,10 @@ export default class Compass extends React.Component {
         <div className="grid_wrapper">
           {this.state.grid}
           {this._createPeople()}
+          <div class="grid_label grid_label_left">Liberal</div>
+          <div class="grid_label grid_label_right">Conservative</div>
+          <div class="grid_label grid_label_top">Authoritarian</div>
+          <div class="grid_label grid_label_bottom">Libertarian</div>
         </div>
       </section>
     );

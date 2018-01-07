@@ -9,10 +9,13 @@ export default class DialogWrapper extends React.Component {
   render() {
     return (
       <Dialog
+        contentClassName={'modal-container'}
         title={`${this.props.selectedPerson.firstName} ${this.props.selectedPerson.lastName}`}
         actions={<FlatButton label="Close" primary={true} onClick={this.props.toggleModal} />}
         autoScrollBodyContent={true}
+        autoDetectWindowHeight={true}
         modal={false}
+        contentStyle={{ width: '100%', maxWidth: 'none' }}
         open={this.props.modalOpen}
         onRequestClose={() => this.props.toggleModal()}
       >
