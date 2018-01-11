@@ -34,7 +34,7 @@ DialogWrapper.propTypes = {
     firstName: PropTypes.string,
     lastName: PropTypes.string,
     tweets: PropTypes.array,
-    resources: PropTypes.object.isRequired,
+    resources: PropTypes.object,
   }).isRequired,
   disableTweets: PropTypes.bool.isRequired,
 };

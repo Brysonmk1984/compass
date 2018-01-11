@@ -10,7 +10,6 @@ export default class TabWrapper extends React.Component {
       let url;
 
       if (t.includes('http')) {
-        //console.log('TWEE', tweet);
         t = t.split('http')[0];
 
         if (tweet.entities.urls.length) {
@@ -45,7 +44,6 @@ export default class TabWrapper extends React.Component {
 
   _displayResources() {
     const entries = Object.entries(this.props.selectedPerson.resources);
-    console.log('E', entries);
     return entries.map((item, i) => {
       return (
         <li key={i}>

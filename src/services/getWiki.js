@@ -9,11 +9,9 @@ export function getWiki(firstName, lastName) {
       firstName,
       lastName,
     };
-    console.log(options);
     axios
       .post(url, options)
       .then(data => {
-        console.log('THE DATA', data);
         resolve(data);
       })
       .catch(err => {

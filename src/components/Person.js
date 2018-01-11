@@ -25,9 +25,7 @@ export default class Person extends React.Component {
         onClick={() => this.props.getUserData(this.props.person)}
         data-balloon={`${this.props.person.firstName} ${this.props.person.lastName}`}
         data-balloon-pos="down"
-      >
-        {/* {this.props.handle} */}
-      </div>
+      />
     );
   }
 }
